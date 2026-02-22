@@ -65,7 +65,7 @@ export default function About() {
               </div>
               <div className="about-info-item">
                 <span className="info-label">Available</span>
-                <span className="info-value available">Open for Internship Opportunities</span>
+                <span className="info-value available">Open for internship opportunities</span>
               </div>
             </div>
             <a href="/Garcia-Charles-Resume.pdf" download className="btn btn-outline about-dl-btn">

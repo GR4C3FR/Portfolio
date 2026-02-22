@@ -62,7 +62,6 @@
 
 .info-value.available {
   color: var(--text);
-  font-weight: 600;
 }
 
 .about-dl-btn {
@@ -81,7 +80,7 @@
   border-radius: 20px;
   overflow: hidden;
   width: 100%;
-  max-width: 320px;
+  max-width: 340px;
 }
 
 .about-photo {
@@ -237,12 +236,12 @@
   animation-range: entry 0% cover 45%;
 }
 .about-info-grid {
-  animation: revealUp 0.6s ease-out both;
+  animation: revealLeft 0.6s ease-out both;
   animation-timeline: view(block);
-  animation-range: entry 0% cover 20%;
+  animation-range: entry 10% cover 20%;
 }
 .about-dl-btn {
-  animation: revealUp 0.55s ease-out both;
+  animation: revealLeft 0.55s ease-out both;
   animation-timeline: view(block);
   animation-range: entry 0% cover 10%;
 }

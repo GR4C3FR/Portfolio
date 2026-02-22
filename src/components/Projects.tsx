@@ -2,44 +2,44 @@ import { useState } from 'react';
 import './Projects.css';
 
 const projects = [
+  // {
+  //   title: 'FrameRate',
+  //   link: 'https://github.com/GR4C3FR',
+  //   description:
+  //     'A full-stack web application that allows users to browse, rate, and review films. Built as an academic project with a focus on responsive UI and clean database design. Features include user authentication, search/filter, and a dynamic rating system.',
+  //   tags: ['HTML', 'CSS', 'JavaScript', 'PHP', 'MySQL'],
+  //   live: '#',
+  //   code: 'https://github.com/GR4C3FR',
+  //   color: '#007bff',
+  // },
   {
-    title: 'FrameRate',
-    link: 'https://github.com/GR4C3FR',
+    title: 'Sharesource',
+    link: 'https://github.com/GR4C3FR/Sharesource.git',
     description:
-      'A full-stack web application that allows users to browse, rate, and review films. Built as an academic project with a focus on responsive UI and clean database design. Features include user authentication, search/filter, and a dynamic rating system.',
-    tags: ['HTML', 'CSS', 'JavaScript', 'PHP', 'MySQL'],
+      'A web app designed to help students reliably access and share academic materials when course resources aren’t consistently uploaded. It features user authentication, uploading and categorized organization of files, admin approval/moderation for quality control, search and filters for quick discovery, and collaborative tools like comments, feedback/discussions, and ratings—optimized for easy access across devices.',
+    tags: ['MongoDB', 'Express.js', 'React', 'Node.js'],
     live: '#',
-    code: 'https://github.com/GR4C3FR',
-    color: '#007bff',
-  },
-  {
-    title: 'ShareSource',
-    link: 'https://github.com/GR4C3FR',
-    description:
-      'A resource-sharing platform for students to upload, discover, and download academic materials. Developed as an academic project emphasizing full-stack development.',
-    tags: ['React', 'Node.js', 'MySQL'],
-    live: '#',
-    code: 'https://github.com/GR4C3FR',
+    code: 'https://github.com/GR4C3FR/Sharesource.git',
     color: '#6f42c1',
   },
   {
     title: 'Personal Portfolio',
-    link: 'https://github.com/GR4C3FR',
+    link: 'https://github.com/GR4C3FR/Portfolio.git',
     description:
       'A modern single-page portfolio website built with React, TypeScript, and Vite. Features smooth scrolling, dark/light mode toggle, and a fully responsive layout.',
     tags: ['React', 'TypeScript', 'Vite', 'CSS3'],
     live: '#',
-    code: 'https://github.com/GR4C3FR',
+    code: 'https://github.com/GR4C3FR/Portfolio.git',
     color: '#20c997',
   },
   {
     title: 'Endless Charms Jewelry',
-    link: 'https://github.com/GR4C3FR',
+    link: 'https://github.com/GR4C3FR/Endless-Charms-Jewelries.git',
     description:
-      'A real-time weather dashboard consuming the OpenWeatherMap API. Displays current conditions, forecasts, and location-based data with a clean, minimal UI.',
-    tags: ['JavaScript', 'REST API', 'HTML5', 'CSS3'],
-    live: '#',
-    code: 'https://github.com/GR4C3FR',
+      'A digital showroom for Endless Charms, a premier high-end jewelry brand in the Philippines, specializing in custom engagement rings, wedding bands, and bespoke luxury jewelry crafted from 14k–18k gold, diamonds, and precious gemstones. The website showcases product collections, highlights ethical sourcing and transparent pricing, features customer testimonials, and offers educational content to help customers make informed purchasing decisions. It supports lead generation through clear calls-to-action for consultations and custom designs, strengthening brand identity and credibility within the jewelry market.',
+    tags: ['MongoDB', 'Express.js', 'EJS', 'Node.js'],
+    live: 'https://endlesscharms.store',
+    code: 'https://github.com/GR4C3FR/Endless-Charms-Jewelries.git',
     color: '#fd7e14',
   },
 //   {
