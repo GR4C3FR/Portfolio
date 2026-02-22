@@ -175,24 +175,34 @@ a.detail-value:hover {
 
 /* ===== Scroll Animations ===== */
 .contact-section .section-title {
-  animation: revealUp 0.6s ease-out both;
+  animation: revealLeft 0.6s ease-out both;
   animation-timeline: view(block);
-  animation-range: entry 30% entry 75%;
+  animation-range: entry 10% cover 45%;
+}
+.contact-section .section-subtitle {
+  animation: revealLeft 0.6s ease-out both;
+  animation-timeline: view(block);
+  animation-range: entry 10% cover 45%;
 }
 .contact-info {
   animation: revealLeft 0.65s ease-out both;
   animation-timeline: view(block);
-  animation-range: entry 30% entry 80%;
+  animation-range: entry 20% cover 45%;
 }
 .contact-detail-item {
   animation: revealLeft 0.55s ease-out both;
   animation-timeline: view(block);
-  animation-range: entry 35% entry 80%;
+  animation-range: entry 20% cover 25%;
 }
 .contact-form {
   animation: revealRight 0.65s ease-out both;
   animation-timeline: view(block);
-  animation-range: entry 30% entry 80%;
+  animation-range: entry 20% cover 25%;
+}
+.contact-socials {
+  animation: revealLeft 0.65s ease-out both;
+  animation-timeline: view(block);
+  animation-range: entry 10% cover 25%;
 }
 
 @media (max-width: 900px) {

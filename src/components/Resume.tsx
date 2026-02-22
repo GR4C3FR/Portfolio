@@ -22,7 +22,7 @@ const experience = [
   },
   {
     period: 'Feb 2025 – Mar 2025',
-    org: 'FilmRate',
+    org: 'FrameRate',
     role: 'Full Stack Developer (Academic Project)',
   },
   {

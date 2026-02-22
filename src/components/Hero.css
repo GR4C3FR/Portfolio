@@ -7,6 +7,11 @@
   overflow: hidden;
 }
 
+/* reduce top spacing so hero sits a bit higher under the sticky nav */
+.hero.section {
+  padding-top: 0;
+}
+
 .hero-inner {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -128,13 +133,13 @@
   animation: revealLeft 0.65s 0.2s  cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 .hero-desc {
-  animation: revealUp   0.65s 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: revealLeft   0.65s 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 .hero-cta {
-  animation: revealUp   0.65s 0.5s  cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: revealLeft   0.65s 0.5s  cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 .hero-socials {
-  animation: revealUp   0.65s 0.62s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: revealLeft   0.65s 0.62s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 .hero-visual {
   animation: revealRight 0.7s 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;

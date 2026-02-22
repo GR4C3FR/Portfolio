@@ -174,27 +174,27 @@
 .resume-header {
   animation: revealUp 0.6s ease-out both;
   animation-timeline: view(block);
-  animation-range: entry 30% entry 75%;
+  animation-range: entry 20% cover 45%;
 }
 .resume-col-title {
-  animation: revealLeft 0.6s ease-out both;
+  animation: revealUp 0.6s ease-out both;
   animation-timeline: view(block);
-  animation-range: entry 30% entry 75%;
+  animation-range: entry 10% cover 45%;
 }
 .resume-row {
-  animation: revealLeft 0.55s ease-out both;
+  animation: revealUp 0.55s ease-out both;
   animation-timeline: view(block);
-  animation-range: entry 35% entry 80%;
+  animation-range: entry 30% cover 55%;
 }
 .certifications-block {
   animation: revealUp 0.6s ease-out both;
   animation-timeline: view(block);
-  animation-range: entry 30% entry 75%;
+  animation-range: entry 30% cover 55%;
 }
 .cert-card {
   animation: revealScale 0.55s ease-out both;
   animation-timeline: view(block);
-  animation-range: entry 35% entry 80%;
+  animation-range: entry 10% cover 30%;
 }
 
 @media (max-width: 768px) {
