@@ -4,16 +4,40 @@ import './Contact.css';
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
   const [sent, setSent] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  // Replace with your Formspree form endpoint
+  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xreaydjb';
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSent(true);
-    setTimeout(() => setSent(false), 4000);
-    setForm({ name: '', email: '', subject: '', message: '' });
+    setLoading(true);
+    setError('');
+    try {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: form.name, email: form.email, subject: form.subject, message: form.message }),
+      });
+
+      if (res.ok) {
+        setSent(true);
+        setTimeout(() => setSent(false), 4000);
+        setForm({ name: '', email: '', subject: '', message: '' });
+      } else {
+        const data = await res.json().catch(() => null);
+        setError((data && data.error) || 'Failed to send message. Please try again later.');
+      }
+    } catch (err) {
+      setError('Failed to send message. Please check your connection.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -70,34 +94,41 @@ export default function Contact() {
 
           {/* Form */}
           <form className="contact-form" onSubmit={handleSubmit}>
-            {sent && (
-              <div className="form-success">
-                Message sent! I'll get back to you soon.
-              </div>
-            )}
+              {sent && (
+                <div className="form-success">
+                  Message sent! I'll get back to you soon.
+                </div>
+              )}
+              {error && (
+                <div className="form-error" role="alert">
+                  {error}
+                </div>
+              )}
             <div className="form-row">
               <div className="form-group">
                 <label htmlFor="name">Name</label>
                 <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  placeholder="Your name"
-                  value={form.name}
-                  onChange={handleChange}
-                  required
+                    id="name"
+                    name="name"
+                    type="text"
+                    placeholder="Your name"
+                    value={form.name}
+                    onChange={handleChange}
+                    required
+                    disabled={loading}
                 />
               </div>
               <div className="form-group">
                 <label htmlFor="email">Email</label>
                 <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  placeholder="your@email.com"
-                  value={form.email}
-                  onChange={handleChange}
-                  required
+                    id="email"
+                    name="email"
+                    type="email"
+                    placeholder="your@email.com"
+                    value={form.email}
+                    onChange={handleChange}
+                    required
+                    disabled={loading}
                 />
               </div>
             </div>
@@ -111,6 +142,7 @@ export default function Contact() {
                 value={form.subject}
                 onChange={handleChange}
                 required
+                disabled={loading}
               />
             </div>
             <div className="form-group">
@@ -123,10 +155,25 @@ export default function Contact() {
                 value={form.message}
                 onChange={handleChange}
                 required
+                disabled={loading}
               />
             </div>
-            <button type="submit" className="btn btn-primary" style={{ width: '100%', justifyContent: 'center' }}>
-              Send Message <SendIcon />
+            <button
+              type="submit"
+              className="btn btn-primary contact-submit-btn"
+              style={{ width: '100%', justifyContent: 'center' }}
+              disabled={loading}
+              aria-busy={loading}
+            >
+              {loading ? (
+                <>
+                  <SpinnerIcon /> Sending...
+                </>
+              ) : (
+                <>
+                  Send Message <SendIcon />
+                </>
+              )}
             </button>
           </form>
         </div>
@@ -185,6 +232,14 @@ function SendIcon() {
     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <line x1="22" y1="2" x2="11" y2="13" />
       <polygon points="22 2 15 22 11 13 2 9 22 2" />
+    </svg>
+  );
+}
+
+function SpinnerIcon() {
+  return (
+    <svg className="spinner" width="16" height="16" viewBox="0 0 50 50" aria-hidden="true">
+      <circle cx="25" cy="25" r="20" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeDasharray="31.4 31.4" />
     </svg>
   );
 }
