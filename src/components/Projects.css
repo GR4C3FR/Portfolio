@@ -1,0 +1,222 @@
+.projects-section {
+  background: linear-gradient(to bottom, var(--bg) 75%, var(--bg-secondary));
+}
+
+.projects-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2.5rem;
+}
+
+.projects-title {
+  font-size: 2.2rem;
+  font-weight: 900;
+  letter-spacing: -0.5px;
+  color: var(--accent);
+}
+
+.resume-dl-btn {
+  font-size: 0.85rem !important;
+  padding: 0.5rem 1.1rem !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Layout */
+.projects-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+/* Featured (Left) */
+.project-featured {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.project-featured-thumb {
+  width: 100%;
+  aspect-ratio: 16/10;
+  border-radius: 14px 14px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  border-bottom: none;
+}
+
+.project-featured-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.project-featured-info {
+  padding: 1.25rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.project-featured-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.project-featured-link {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text);
+  word-break: break-all;
+  transition: color 0.2s;
+}
+
+.project-featured-link:hover {
+  color: var(--accent);
+}
+
+.project-featured-desc {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.project-tag {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.2rem 0.65rem;
+  border-radius: 50px;
+  background: color-mix(in srgb, var(--accent) 12%, var(--bg-secondary));
+  color: var(--accent);
+}
+
+.project-featured-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+/* Right Grid */
+.project-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.project-card {
+  cursor: pointer;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid transparent;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  background: var(--bg-card);
+}
+
+.project-card:hover {
+  box-shadow: var(--shadow);
+}
+
+.project-card.active {
+  border-color: var(--accent);
+}
+
+.project-card-thumb {
+  width: 100%;
+  aspect-ratio: 4/3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.project-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-align: center;
+  padding: 0.5rem;
+}
+
+.project-card-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.project-card-info {
+  padding: 0.6rem 0.75rem 0.75rem;
+}
+
+.project-card-title {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.15rem;
+}
+
+.project-card-desc {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ===== Scroll Animations ===== */
+.projects-header {
+  animation: revealUp 0.6s ease-out both;
+  animation-timeline: view(block);
+  animation-range: entry 0% cover 45%;
+}
+.project-featured {
+  animation: revealLeft 0.65s ease-out both;
+  animation-timeline: view(block);
+  animation-range: entry 0% cover 45%;
+}
+.project-card {
+  animation: revealRight 0.55s ease-out both;
+  animation-timeline: view(block);
+  animation-range: entry 0% cover 30%;
+}
+
+@media (max-width: 900px) {
+  .projects-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .project-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .project-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
