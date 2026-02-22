@@ -26,15 +26,59 @@ export default function Navbar({ darkMode, toggleDarkMode }: NavbarProps) {
 
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
-    setMenuOpen(false);
+    // If on small screens (drawer open), close drawer first so body/html overflow restores,
+    // then scroll after a short delay so scrollIntoView works reliably.
+    const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+    if (isMobile) {
+      setMenuOpen(false);
+      setTimeout(() => {
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 260);
+    } else {
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+      setMenuOpen(false);
+    }
   };
+
+  const handleDrawerNavClick = (id: string, e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
+    const el = document.getElementById(id);
+    setMenuOpen(false);
+    // allow drawer to close and overflow to restore, then scroll
+    setTimeout(() => {
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+        try {
+          (el as HTMLElement).focus();
+        } catch (err) {
+          // ignore
+        }
+      }
+    }, 260);
+  };
+
+  useEffect(() => {
+    // lock document scroll when menu is open (both html and body)
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+    document.documentElement.style.overflow = menuOpen ? 'hidden' : '';
+    document.documentElement.style.overflowX = menuOpen ? 'hidden' : '';
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setMenuOpen(false);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+      document.documentElement.style.overflowX = '';
+    };
+  }, [menuOpen]);
 
   return (
     <header className="nav-wrapper">
       <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
         {/* Logo */}
-        <button className="nav-logo" onClick={() => scrollTo('home')}>
+        <button type="button" className="nav-logo" onClick={() => scrollTo('home')}>
           <img
             src={darkMode ? '/red-logo.svg' : '/blue-logo.svg'}
             alt="Charles Garcia Logo"
@@ -43,10 +87,10 @@ export default function Navbar({ darkMode, toggleDarkMode }: NavbarProps) {
         </button>
 
         {/* Center Nav Links */}
-        <ul className={`nav-links ${menuOpen ? 'open' : ''}`}>
+        <ul className="nav-links">
           {navLinks.map((link) => (
             <li key={link.id}>
-              <button onClick={() => scrollTo(link.id)}>{link.label}</button>
+              <button type="button" onClick={() => scrollTo(link.id)}>{link.label}</button>
             </li>
           ))}
         </ul>
@@ -63,6 +107,7 @@ export default function Navbar({ darkMode, toggleDarkMode }: NavbarProps) {
             <span className="btn-label">Resume</span>
           </a>
           <button
+            type="button"
             className="icon-btn"
             onClick={toggleDarkMode}
             title={darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
@@ -73,24 +118,36 @@ export default function Navbar({ darkMode, toggleDarkMode }: NavbarProps) {
 
           {/* Hamburger */}
           <button
+            type="button"
             className="hamburger"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle menu"
+            aria-expanded={menuOpen}
           >
             {menuOpen ? <CloseIcon /> : <HamburgerIcon />}
           </button>
         </div>
       </nav>
 
-      {/* Mobile Menu */}
+      {/* Side drawer for mobile */}
       {menuOpen && (
-        <div className="mobile-menu">
-          {navLinks.map((link) => (
-            <button key={link.id} onClick={() => scrollTo(link.id)}>
-              {link.label}
-            </button>
-          ))}
-        </div>
+        <>
+          <div className="menu-backdrop" onClick={() => setMenuOpen(false)} />
+          <aside className="side-drawer" role="dialog" aria-modal="true">
+            <div className="drawer-header">
+              <button type="button" className="hamburger close" onClick={() => setMenuOpen(false)} aria-label="Close menu">
+                <CloseIcon />
+              </button>
+            </div>
+            <nav className="drawer-nav">
+              {navLinks.map((link) => (
+                <button type="button" key={link.id} onClick={(e) => handleDrawerNavClick(link.id, e)} className="drawer-link">
+                  {link.label}
+                </button>
+              ))}
+            </nav>
+          </aside>
+        </>
       )}
     </header>
   );
