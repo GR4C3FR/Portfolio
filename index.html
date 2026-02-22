@@ -2,15 +2,32 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <!-- Theme-aware favicon: default will be set by script below -->
+    <link id="theme-favicon" rel="icon" type="image/svg+xml" href="/favicon-black.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Charles Garcia | Portfolio</title>
+    <title>Charles Garcia</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      (function() {
+        const favicon = document.getElementById('theme-favicon');
+        if (!favicon) return;
+        const setIcon = (isDark) => {
+          favicon.setAttribute('href', isDark ? '/favicon-white.svg' : '/favicon-black.svg');
+        };
+        const mq = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
+        setIcon(mq && mq.matches);
+        if (mq && typeof mq.addEventListener === 'function') {
+          mq.addEventListener('change', (e) => setIcon(e.matches));
+        } else if (mq && typeof mq.addListener === 'function') {
+          mq.addListener((e) => setIcon(e.matches));
+        }
+      })();
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
