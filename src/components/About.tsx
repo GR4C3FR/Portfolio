@@ -61,7 +61,19 @@ export default function About() {
               </div>
               <div className="about-info-item">
                 <span className="info-label">Email</span>
-                <span className="info-value">garcia.charlesdan@gmail.com</span>
+                <button
+                  type="button"
+                  className="info-value email-link"
+                  onClick={() => {
+                    const el = document.getElementById('contact');
+                    if (el) el.scrollIntoView({ behavior: 'smooth' });
+                    setTimeout(() => {
+                      window.location.href = 'mailto:garcia.charlesdan@gmail.com';
+                    }, 350);
+                  }}
+                >
+                  garcia.charlesdan@gmail.com
+                </button>
               </div>
               <div className="about-info-item">
                 <span className="info-label">Available</span>

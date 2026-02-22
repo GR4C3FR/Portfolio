@@ -52,9 +52,19 @@ export default function Footer({ scrollTo, darkMode }: FooterProps) {
         {/* Right — Contact */}
         <div className="footer-contact">
           <h4 className="footer-col-title">Contact</h4>
-          <a href="mailto:garcia.charlesdan@gmail.com" className="footer-email">
+          <button
+            type="button"
+            className="footer-email"
+            onClick={() => {
+              scrollTo('contact');
+              // open mail client after scrolling
+              setTimeout(() => {
+                window.location.href = 'mailto:garcia.charlesdan@gmail.com';
+              }, 350);
+            }}
+          >
             garcia.charlesdan@gmail.com
-          </a>
+          </button>
           <div className="footer-socials">
             <a
               href="https://www.linkedin.com/in/charles-garcia-9b6b1934b"

@@ -61,7 +61,14 @@ export default function Contact() {
                 <div className="contact-icon-wrap"><EmailIcon /></div>
                 <div>
                   <span className="detail-label">Email</span>
-                  <a href="mailto:garcia.charlesdan@gmail.com" className="detail-value">
+                  <a
+                    href="mailto:garcia.charlesdan@gmail.com"
+                    className="detail-value"
+                    onClick={() => {
+                      const el = document.getElementById('contact');
+                      if (el) el.scrollIntoView({ behavior: 'smooth' });
+                    }}
+                  >
                     garcia.charlesdan@gmail.com
                   </a>
                 </div>
