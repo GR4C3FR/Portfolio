@@ -83,7 +83,7 @@ export default function Resume() {
         <div className="resume-header">
           <h2 className="resume-title">Resume</h2>
           <a href="/Garcia-Charles-Resume.pdf" download className="btn btn-outline resume-dl-btn">
-            <DownloadIcon /> Download Resume
+            <DownloadIcon /> <span className="resume-dl-label">Download Resume</span>
           </a>
         </div>
 

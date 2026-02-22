@@ -210,6 +210,23 @@
   .resume-row {
     grid-template-columns: 110px 1fr;
   }
+
+  /* On smaller screens, show only the download icon for the resume button */
+  .resume-dl-btn .resume-dl-label {
+    display: none;
+  }
+
+  .resume-dl-btn {
+    padding: 0.45rem 0.6rem !important;
+  }
+
+  .resume-dl-btn svg {
+    width: 16px;
+    height: 16px;
+    margin-right: 0;
+    display: inline-block;
+    vertical-align: middle;
+  }
 }
 
 @media (max-width: 480px) {
