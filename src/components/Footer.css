@@ -50,6 +50,15 @@
   padding: 0.55rem 1.2rem !important;
 }
 
+.footer-dl-btn:hover {
+  transform: translateY(-6px);
+  border-color: color-mix(in srgb, var(--accent) 20%, transparent);
+  box-shadow:
+    0 10px 30px color-mix(in srgb, var(--accent) 25%, transparent),
+    0 0 40px color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
+
 /* Links */
 .footer-col-title {
   font-size: 1rem;
@@ -121,10 +130,12 @@
 }
 
 .footer-social-icon:hover {
-  border-color: var(--accent);
   color: var(--accent);
   background: color-mix(in srgb, var(--accent) 10%, var(--bg-card));
   transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--accent) 28%, transparent);
+  box-shadow: 0 12px 36px color-mix(in srgb, var(--accent) 28%, transparent),
+              0 0 48px color-mix(in srgb, var(--accent) 14%, transparent);
 }
 
 /* Bottom Bar */

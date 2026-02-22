@@ -63,9 +63,9 @@ export default function Projects() {
       <div className="container">
         <div className="projects-header">
           <h2 className="projects-title">Projects</h2>
-          <a href="/Garcia-Charles-Resume.pdf" download className="btn btn-outline resume-dl-btn">
+          {/* <a href="/Garcia-Charles-Resume.pdf" download className="btn btn-outline resume-dl-btn">
             <DownloadIcon /> Download Resume
-          </a>
+          </a> */}
         </div>
 
         <div className="projects-layout">
@@ -115,9 +115,7 @@ export default function Projects() {
                   className="project-card-thumb"
                   style={{ background: `${project.color}22` }}
                 >
-                  {hovered === project.title && selected.title !== project.title && (
-                    <div className="project-card-overlay">Click to view details</div>
-                  )}
+                  {/* overlay removed per request */}
                   <div className="project-card-icon" style={{ background: project.color }}>
                     <CodeIcon />
                   </div>

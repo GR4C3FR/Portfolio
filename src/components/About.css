@@ -72,6 +72,7 @@
   font-family: inherit;
   text-decoration: none;
   font-weight: 500;
+  transition: color 0.2s;
 }
 
 .email-link:hover {
@@ -156,7 +157,7 @@
   border: 1px solid var(--border);
   border-radius: 16px;
   width: 110px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.2s ease;
   cursor: default;
 }
 
@@ -184,6 +185,14 @@
   text-align: center;
 }
 
+/* Accent glow on hover for skills */
+.tech-skill-item:hover {
+  transform: translateY(-6px);
+  border-color: color-mix(in srgb, var(--accent) 22%, transparent);
+  box-shadow: 0 10px 30px color-mix(in srgb, var(--accent) 25%, transparent),
+              0 0 40px color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
 /* Soft Skills */
 .soft-skills-grid {
   display: grid;
@@ -197,12 +206,14 @@
   border-radius: 16px;
   padding: 1.5rem;
   text-align: center;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.18s ease;
 }
 
 .soft-skill-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow);
+  transform: translateY(-6px);
+  border-color: color-mix(in srgb, var(--accent) 20%, transparent);
+  box-shadow: 0 10px 30px color-mix(in srgb, var(--accent) 25%, transparent),
+              0 0 40px color-mix(in srgb, var(--accent) 12%, transparent);
 }
 
 .soft-skill-name {
@@ -234,13 +245,15 @@
   font-weight: 500;
   color: var(--text);
   background: var(--bg-card);
-  transition: all 0.2s ease;
+  transition: color 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
   cursor: default;
 }
 
 .skill-tag:hover {
   border-color: var(--accent);
   color: var(--accent);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px color-mix(in srgb, var(--accent) 18%, transparent);
 }
 
 /* ===== Scroll Animations ===== */

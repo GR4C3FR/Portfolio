@@ -123,12 +123,16 @@
   border-radius: 12px;
   overflow: hidden;
   border: 2px solid transparent;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.25s ease;
   background: var(--bg-card);
 }
 
 .project-card:hover {
-  box-shadow: var(--shadow);
+  transform: translateY(-6px);
+  border-color: color-mix(in srgb, var(--accent) 20%, transparent);
+  box-shadow:
+    0 10px 30px color-mix(in srgb, var(--accent) 25%, transparent),
+    0 0 40px color-mix(in srgb, var(--accent) 12%, transparent);
 }
 
 .project-card.active {
@@ -189,7 +193,7 @@
 
 /* ===== Scroll Animations ===== */
 .projects-header {
-  animation: revealUp 0.6s ease-out both;
+  animation: revealLeft 0.6s ease-out both;
   animation-timeline: view(block);
   animation-range: entry 50% cover 50%;
 }
