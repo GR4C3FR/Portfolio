@@ -25,7 +25,7 @@ const softSkills = [
 ];
 
 const tools = [
-  'Figma', 'VS Code', 'Git & GitHub', 'Adobe Photoshop', 'Adobe Premiere Pro', 'Canva',
+  'Git & GitHub', 'Figma', 'Adobe Photoshop', 'Adobe Illustrator', 'Davinci Resolve',
 ];
 
 export default function About() {

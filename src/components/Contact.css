@@ -1,3 +1,7 @@
+.section-title {
+  color: var(--accent);
+}
+
 .contact-section {
   background: linear-gradient(to bottom, var(--bg) 75%, var(--footer-bg));
 }
