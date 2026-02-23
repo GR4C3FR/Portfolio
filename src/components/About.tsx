@@ -91,6 +91,37 @@ export default function About() {
               {/* <p className="about-photo-caption">Charles Daniel Garcia</p> */}
             </div>
           </div>
+          {/* Mobile-only duplicate of the info grid so items appear under the photo */}
+          <div className="about-info-grid mobile-info">
+            <div className="about-info-item">
+              <span className="info-label">Name</span>
+              <span className="info-value">Charles Daniel Garcia</span>
+            </div>
+            <div className="about-info-item">
+              <span className="info-label">Role</span>
+              <span className="info-value">Web Designer / FE Dev</span>
+            </div>
+            <div className="about-info-item">
+              <span className="info-label">Email</span>
+              <button
+                type="button"
+                className="info-value email-link"
+                onClick={() => {
+                  const el = document.getElementById('contact');
+                  if (el) el.scrollIntoView({ behavior: 'smooth' });
+                  setTimeout(() => {
+                    window.location.href = 'mailto:garcia.charlesdan@gmail.com';
+                  }, 350);
+                }}
+              >
+                garcia.charlesdan@gmail.com
+              </button>
+            </div>
+            <div className="about-info-item">
+              <span className="info-label">Available</span>
+              <span className="info-value available">Open for internship opportunities</span>
+            </div>
+          </div>
         </div>
 
         {/* Technical Skills */}

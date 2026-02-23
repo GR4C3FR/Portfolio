@@ -320,6 +320,44 @@
   .soft-skills-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  /* Mobile: stack about info items and center them
+     Order: Name (1), Email (3 -> 2), Role (2 -> 3), Available (4) */
+  .about-info-grid {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 0.9rem;
+  }
+
+  .about-info-item {
+    align-items: center;
+    text-align: center;
+  }
+
+  .about-info-item:nth-child(1) { order: 1; }
+  .about-info-item:nth-child(2) { order: 3; }
+  .about-info-item:nth-child(3) { order: 2; }
+  .about-info-item:nth-child(4) { order: 4; }
+
+  /* Hide the in-text info grid on mobile and show the mobile duplicate below the photo */
+  .about-text > .about-info-grid { display: none; }
+  .mobile-info { display: grid; grid-template-columns: 1fr; justify-items: center; gap: 0.9rem; }
+  /* Ensure mobile-info appears right after the photo */
+  .about-photo-wrap { order: -1; }
+  .mobile-info { order: 0; }
+  .about-text { order: 1; }
+
+  /* Reduce top padding so About sits closer to Hero on mobile */
+  .about-section {
+    padding-top: 40px;
+    padding-bottom: 60px;
+  }
+
+  /* Reduce spacing inside the about-top block on mobile */
+  .about-top {
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
 }
 
 @media (max-width: 560px) {
@@ -335,5 +373,7 @@
     width: 90px;
     padding: 1rem;
   }
+
+  
 }
 
