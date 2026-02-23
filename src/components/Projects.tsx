@@ -2,16 +2,26 @@ import { useState } from 'react';
 import './Projects.css';
 
 const projects = [
-  // {
-  //   title: 'FrameRate',
-  //   link: 'https://github.com/GR4C3FR',
-  //   description:
-  //     'A full-stack web application that allows users to browse, rate, and review films. Built as an academic project with a focus on responsive UI and clean database design. Features include user authentication, search/filter, and a dynamic rating system.',
-  //   tags: ['HTML', 'CSS', 'JavaScript', 'PHP', 'MySQL'],
-  //   live: '#',
-  //   code: 'https://github.com/GR4C3FR',
-  //   color: '#007bff',
-  // },
+  {
+    title: 'Endless Charms Jewelry',
+    link: 'https://github.com/GR4C3FR/Endless-Charms-Jewelries.git',
+    description:
+      'A digital showroom for Endless Charms, a premier high-end jewelry brand in the Philippines, specializing in custom engagement rings, wedding bands, and bespoke luxury jewelry crafted from 14k–18k gold, diamonds, and precious gemstones. The website showcases product collections, highlights ethical sourcing and transparent pricing, features customer testimonials, and offers educational content to help customers make informed purchasing decisions. It supports lead generation through clear calls-to-action for consultations and custom designs, strengthening brand identity and credibility within the jewelry market.',
+    tags: ['MongoDB', 'Express.js', 'EJS', 'Node.js'],
+    live: 'https://endlesscharms.store',
+    code: 'https://github.com/GR4C3FR/Endless-Charms-Jewelries.git',
+    color: '#fd7e14',
+  },
+  {
+    title: 'Inocencio Magtoto Memorial Foundation, Inc. (IMMFI)',
+    link: 'https://github.com/GR4C3FR',
+    description:
+      'A Kanban-style task management application with drag-and-drop, local storage persistence, and a clean, intuitive interface for managing personal tasks.',
+    tags: ['React', 'TypeScript', 'Local Storage'],
+    live: 'https://immfi.org/',
+    code: 'https://github.com/GR4C3FR',
+    color: '#e83e8c',
+  },
   {
     title: 'Sharesource',
     link: 'https://github.com/GR4C3FR/Sharesource.git',
@@ -23,6 +33,16 @@ const projects = [
     color: '#6f42c1',
   },
   {
+    title: 'FrameRate',
+    link: 'https://github.com/GR4C3FR',
+    description:
+      'A full-stack web application that allows users to browse, rate, and review films. Built as an academic project with a focus on responsive UI and clean database design. Features include user authentication, search/filter, and a dynamic rating system.',
+    tags: ['HTML', 'CSS', 'JavaScript', 'PHP', 'MySQL'],
+    live: '#',
+    code: 'https://github.com/GR4C3FR',
+    color: '#007bff',
+  },
+  {
     title: 'Personal Portfolio',
     link: 'https://github.com/GR4C3FR/Portfolio.git',
     description:
@@ -32,26 +52,6 @@ const projects = [
     code: 'https://github.com/GR4C3FR/Portfolio.git',
     color: '#20c997',
   },
-  {
-    title: 'Endless Charms Jewelry',
-    link: 'https://github.com/GR4C3FR/Endless-Charms-Jewelries.git',
-    description:
-      'A digital showroom for Endless Charms, a premier high-end jewelry brand in the Philippines, specializing in custom engagement rings, wedding bands, and bespoke luxury jewelry crafted from 14k–18k gold, diamonds, and precious gemstones. The website showcases product collections, highlights ethical sourcing and transparent pricing, features customer testimonials, and offers educational content to help customers make informed purchasing decisions. It supports lead generation through clear calls-to-action for consultations and custom designs, strengthening brand identity and credibility within the jewelry market.',
-    tags: ['MongoDB', 'Express.js', 'EJS', 'Node.js'],
-    live: 'https://endlesscharms.store',
-    code: 'https://github.com/GR4C3FR/Endless-Charms-Jewelries.git',
-    color: '#fd7e14',
-  },
-//   {
-//     title: 'Task Manager App',
-//     link: 'https://github.com/GR4C3FR',
-//     description:
-//       'A Kanban-style task management application with drag-and-drop, local storage persistence, and a clean, intuitive interface for managing personal tasks.',
-//     tags: ['React', 'TypeScript', 'Local Storage'],
-//     live: '#',
-//     code: 'https://github.com/GR4C3FR',
-//     color: '#e83e8c',
-//   },
 ];
 
 export default function Projects() {
@@ -93,7 +93,9 @@ export default function Projects() {
                 ))}
               </div>
               <div className="project-featured-actions">
-                <a href={selected.live} className="btn btn-primary btn-sm" target="_blank" rel="noreferrer">Live Demo</a>
+                {(selected.title !== 'FrameRate' && selected.title !== 'Sharesource' && selected.live && selected.live !== '#') && (
+                  <a href={selected.live} className="btn btn-primary btn-sm" target="_blank" rel="noreferrer">Live Demo</a>
+                )}
                 <a href={selected.code} className="btn btn-outline btn-sm" target="_blank" rel="noreferrer">
                   <GithubSmIcon /> Code
                 </a>
