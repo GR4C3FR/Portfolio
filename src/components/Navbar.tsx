@@ -76,7 +76,7 @@ export default function Navbar({ darkMode, toggleDarkMode }: NavbarProps) {
 
   return (
     <header className="nav-wrapper">
-      <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
+      <nav className={`navbar ${scrolled ? 'scrolled' : ''} ${menuOpen ? 'drawer-open' : ''}`}>
         {/* Logo */}
         <button type="button" className="nav-logo" onClick={() => scrollTo('home')}>
           <img
@@ -129,26 +129,26 @@ export default function Navbar({ darkMode, toggleDarkMode }: NavbarProps) {
         </div>
       </nav>
 
-      {/* Side drawer for mobile */}
-      {menuOpen && (
-        <>
-          <div className="menu-backdrop" onClick={() => setMenuOpen(false)} />
-          <aside className="side-drawer" role="dialog" aria-modal="true">
-            <div className="drawer-header">
-              <button type="button" className="hamburger close" onClick={() => setMenuOpen(false)} aria-label="Close menu">
-                <CloseIcon />
-              </button>
-            </div>
-            <nav className="drawer-nav">
-              {navLinks.map((link) => (
-                <button type="button" key={link.id} onClick={(e) => handleDrawerNavClick(link.id, e)} className="drawer-link">
-                  {link.label}
-                </button>
-              ))}
-            </nav>
-          </aside>
-        </>
-      )}
+      {/* Side drawer for mobile - keep mounted and toggle open class for smooth transitions */}
+      <div
+        className={`menu-backdrop ${menuOpen ? 'open' : ''}`}
+        onClick={() => setMenuOpen(false)}
+        aria-hidden={!menuOpen}
+      />
+      <aside className={`side-drawer ${menuOpen ? 'open' : ''}`} role="dialog" aria-modal="true" aria-hidden={!menuOpen}>
+        <div className="drawer-header">
+          <button type="button" className="hamburger close" onClick={() => setMenuOpen(false)} aria-label="Close menu">
+            <CloseIcon />
+          </button>
+        </div>
+        <nav className="drawer-nav">
+          {navLinks.map((link) => (
+            <button type="button" key={link.id} onClick={(e) => handleDrawerNavClick(link.id, e)} className="drawer-link">
+              {link.label}
+            </button>
+          ))}
+        </nav>
+      </aside>
     </header>
   );
 }
