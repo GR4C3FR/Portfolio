@@ -40,6 +40,8 @@
   margin-bottom: 1.75rem;
 }
 
+.mobile-info { display: none; }
+
 .about-info-item {
   display: flex;
   flex-direction: column;
