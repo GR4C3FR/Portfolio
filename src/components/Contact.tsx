@@ -77,7 +77,7 @@ export default function Contact() {
                 <div className="contact-icon-wrap"><LocationIcon /></div>
                 <div>
                   <span className="detail-label">Location</span>
-                  <span className="detail-value">Philippines</span>
+                  <span className="detail-value">Pampanga, Philippines</span>
                 </div>
               </div>
               <div className="contact-detail-item">

@@ -143,10 +143,37 @@
 
 /* Technical Skills */
 .tech-skills-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
   gap: 1.5rem;
+  align-items: start;
+}
+
+.tech-skills-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem; /* increased vertical spacing between skill rows on desktop */
+}
+
+.tech-skills-row {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.tech-skills-row.row-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.tech-skills-row.row-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.tech-skills-row.center {
+  justify-content: center;
+}
+
+.tech-skills-row.last-row {
+  justify-content: center;
 }
 
 .tech-skill-item {
@@ -158,7 +185,7 @@
   background: var(--skill-bg, var(--bg-card));
   border: 1px solid var(--border);
   border-radius: 16px;
-  width: 110px;
+  width: 100%;
   transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.2s ease;
   cursor: default;
 }
@@ -176,6 +203,13 @@
   justify-content: center;
 }
 
+.tech-skill-logo img.tech-skill-img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  display: block;
+}
+
 .tech-skill-logo svg {
   width: 48px;
   height: 48px;
@@ -185,6 +219,36 @@
   font-size: 0.78rem;
   font-weight: 700;
   text-align: center;
+}
+
+/* Helpers to toggle desktop vs mobile renderings */
+/*
+  Make `.desktop-only` a column flex container so the gap between
+  the `.tech-skills-row` children is honored on desktop. Previously
+  the rows were wrapped inside a single element and the gap on
+  `.tech-skills-rows` affected only the desktop/mobile wrappers.
+*/
+.desktop-only {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* space between the three desktop rows */
+}
+.mobile-only { display: none; }
+
+/* Mobile-specific grid layout (first 9 in 3x3, last item centered) */
+.tech-skills-mobile-grid .mobile-grid-first9 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+.tech-skills-mobile-grid .mobile-grid-last {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 0.8rem;
+}
+.tech-skill-item.solo {
+  grid-column: 2;
 }
 
 /* Accent glow on hover for skills */
@@ -198,7 +262,7 @@
 /* Soft Skills */
 .soft-skills-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 1.25rem;
 }
 
@@ -323,6 +387,18 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .tech-skills-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .tech-skills-row.row-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .tech-skills-row.row-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
   /* Mobile: stack about info items and center them
      Order: Name (1), Email (3 -> 2), Role (2 -> 3), Available (4) */
   .about-info-grid {
@@ -367,15 +443,36 @@
     grid-template-columns: 1fr;
   }
 
-  .tech-skills-grid {
-    gap: 1rem;
+  /* Hide desktop grouped layout and show mobile grid */
+  .desktop-only { display: none; }
+  .mobile-only { display: block; }
+
+  /* Tighter gaps and consistent item sizing for small screens */
+  .tech-skills-mobile-grid .mobile-grid-first9,
+  .tech-skills-mobile-grid .mobile-grid-last {
+    gap: 0.6rem;
   }
 
   .tech-skill-item {
-    width: 90px;
-    padding: 1rem;
+    padding: 0.75rem;
+    min-height: 78px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
-  
+  .tech-skill-logo { width: 40px; height: 40px; }
+  .tech-skill-logo img.tech-skill-img { width: 32px; height: 32px; }
+
+  /* Ensure the mobile first-9 grid is laid out as 3 columns */
+  .tech-skills-mobile-grid .mobile-grid-first9 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* Center the final skill in the middle column */
+  .tech-skills-mobile-grid .mobile-grid-last {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
 }
 

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import './Resume.css';
 
 const education = [
@@ -20,18 +21,18 @@ const experience = [
     org: 'Google Developer Groups, Holy Angel University',
     role: 'Creative Staff',
   },
+  // {
+  //   period: 'Feb 2025 – Mar 2025',
+  //   org: 'FrameRate',
+  //   role: 'Full Stack Developer (Academic Project)',
+  // },
+  // {
+  //   period: 'Sep 2025 – Oct 2025',
+  //   org: 'Sharesource',
+  //   role: 'Full Stack Developer (Academic Project)',
+  // },
   {
-    period: 'Feb 2025 – Mar 2025',
-    org: 'FrameRate',
-    role: 'Full Stack Developer (Academic Project)',
-  },
-  {
-    period: 'Sep 2025 – Oct 2025',
-    org: 'Sharesource',
-    role: 'Full Stack Developer (Academic Project)',
-  },
-  {
-    period: 'Oct 2025 – Present',
+    period: 'Oct 2025 – Dec 2025',
     org: '',
     role: 'Marketing Video Editor',
   },
@@ -42,41 +43,48 @@ const certifications = [
     title: 'Legacy JavaScript Algorithms and Data Structures',
     issuer: 'freeCodeCamp',
     color: '#0a0a23',
-    verify: 'https://www.freecodecamp.org/certification/',
+    verify: 'https://www.freecodecamp.org/certification/charlesgarcia/javascript-algorithms-and-data-structures',
+    thumb: '/Legacy Javascript.png',
   },
   {
     title: 'Responsive Web Design',
     issuer: 'freeCodeCamp',
     color: '#0a0a23',
-    verify: 'https://www.freecodecamp.org/certification/',
+    verify: 'https://www.freecodecamp.org/certification/charlesgarcia/responsive-web-design',
+    thumb: '/Responsive Web Design.png',
   },
   {
     title: 'JavaScript Essentials 1',
     issuer: 'Cisco Networking Academy',
     color: '#1ba0d7',
-    verify: 'https://www.netacad.com/',
+    verify: 'https://www.credly.com/badges/21f0fb1b-894b-4b23-bb7a-818bad20f089/print',
+    thumb: '/JavaScript Essentials 1.jpg',
   },
   {
-    title: 'UI/UX Basics',
-    issuer: 'Online Course',
+    title: 'Basics of UI/UX',
+    issuer: 'Simplilearn',
     color: '#ff6b6b',
-    verify: '#',
+    verify: 'https://simpli-web.app.link/e/TKw01bVm10b',
+    thumb: '/Basics of UI UX.jpg',
   },
   {
-    title: 'Graphic Design',
-    issuer: 'Online Course',
+    title: 'Introduction to PHP',
+    issuer: 'Simplilearn',
     color: '#f7931e',
-    verify: '#',
+    verify: 'https://simpli-web.app.link/e/W9orMjen10b',
+    thumb: '/Introduction to PHP.jpg',
   },
   {
     title: 'Introduction to Figma',
-    issuer: 'Google / Coursera',
+    issuer: 'Simplilearn',
     color: '#a259ff',
-    verify: 'https://www.coursera.org/',
+    verify: 'https://simpli-web.app.link/e/U5Bwmgcn10b',
+    thumb: '/Introduction to Figma.jpg',
   },
 ];
 
 export default function Resume() {
+  const [preview, setPreview] = useState<null | { title: string; src: string; isPdf: boolean }>(null);
   return (
     <section id="resume" className="section resume-section">
       <div className="container">
@@ -119,14 +127,48 @@ export default function Resume() {
 
         {/* Certifications */}
         <div className="certifications-block">
-          <h3 className="certifications-title">Certifications</h3>
+          <div className="certifications-header">
+            <h3 className="certifications-title">Certifications</h3>
+            <a
+              href="https://drive.google.com/drive/u/5/folders/1mwjg1zE42E1seDnZrLZRnbIu6Vtd4Ve4"
+              target="_blank"
+              rel="noreferrer"
+              className="btn btn-outline resume-dl-btn view-others-btn"
+            >
+              <ExternalIcon /> View Others
+            </a>
+          </div>
           <div className="certifications-grid">
             {certifications.map((cert) => (
-              <div key={cert.title} className="cert-card">
+              <div
+                key={cert.title}
+                className="cert-card"
+                onClick={() => {
+                  if (cert.thumb) {
+                    const isPdf = cert.thumb.toLowerCase().endsWith('.pdf');
+                    setPreview({ title: cert.title, src: cert.thumb, isPdf });
+                  }
+                }}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => { if (e.key === 'Enter') { if (cert.thumb) { setPreview({ title: cert.title, src: cert.thumb, isPdf: cert.thumb.toLowerCase().endsWith('.pdf') }); } } }}
+              >
                 <div className="cert-card-thumb" style={{ background: `${cert.color}22` }}>
-                  <div className="cert-card-badge" style={{ background: cert.color }}>
-                    <CertIcon />
-                  </div>
+                  {cert.thumb ? (
+                    cert.thumb.toLowerCase().endsWith('.pdf') ? (
+                      <object data={cert.thumb} type="application/pdf" className="cert-thumb-embed"> 
+                        <div className="cert-thumb-fallback">View PDF</div>
+                      </object>
+                    ) : (
+                      // image
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img src={cert.thumb} alt={cert.title} className="cert-thumb-img" />
+                    )
+                  ) : (
+                    <div className="cert-card-badge" style={{ background: cert.color }}>
+                      <CertIcon />
+                    </div>
+                  )}
                 </div>
                 <div className="cert-card-info">
                   <p className="cert-title">{cert.title}</p>
@@ -136,6 +178,7 @@ export default function Resume() {
                     target="_blank"
                     rel="noreferrer"
                     className="cert-verify-btn btn btn-outline btn-sm"
+                    onClick={(e) => e.stopPropagation()}
                   >
                     <ExternalIcon /> Verify
                   </a>
@@ -144,6 +187,22 @@ export default function Resume() {
             ))}
           </div>
         </div>
+        {preview && (
+          <div className="cert-modal" onClick={() => setPreview(null)}>
+            <div className="cert-modal-inner" onClick={(e) => e.stopPropagation()}>
+              <button className="cert-modal-close" onClick={() => setPreview(null)} aria-label="Close preview">×</button>
+              <h4 className="cert-modal-title">{preview.title}</h4>
+              <div className="cert-preview">
+                {preview.isPdf ? (
+                  <iframe src={preview.src} title={preview.title} className="cert-preview-iframe" />
+                ) : (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={preview.src} alt={preview.title} className="cert-preview-img" />
+                )}
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );

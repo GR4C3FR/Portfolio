@@ -14,12 +14,12 @@ const projects = [
   },
   {
     title: 'Inocencio Magtoto Memorial Foundation, Inc. (IMMFI)',
-    link: 'https://github.com/GR4C3FR',
+    link: 'https://github.com/eishley15/immfi.git',
     description:
-      'A Kanban-style task management application with drag-and-drop, local storage persistence, and a clean, intuitive interface for managing personal tasks.',
-    tags: ['React', 'TypeScript', 'Local Storage'],
+      'Develop and deploy IMMFI’s official website with integrated real-time functionality and interactive elements to increase engagement and streamline volunteer and donation processes.',
+    tags: ['MongoDB', 'Express.js', 'React', 'Node.js'],
     live: 'https://immfi.org/',
-    code: 'https://github.com/GR4C3FR',
+    code: 'https://github.com/eishley15/immfi.git',
     color: '#e83e8c',
   },
   {
