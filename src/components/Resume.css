@@ -323,6 +323,21 @@
     display: inline-block;
     vertical-align: middle;
   }
+
+  /* Make modal preview smaller on tablet / small laptop */
+  .cert-modal {
+    padding: 0.75rem;
+  }
+
+  .cert-modal-inner {
+    max-width: 720px;
+    padding: 0.75rem;
+  }
+
+  .cert-preview {
+    height: 60vh;
+    max-height: 560px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -336,6 +351,21 @@
   }
   .cert-card-thumb {
     height: 100px;
+  }
+
+  /* Mobile: tighten modal and preview sizes so they fit comfortably */
+  .cert-modal {
+    padding: 0.5rem;
+  }
+
+  .cert-modal-inner {
+    max-width: 360px;
+    padding: 0.5rem;
+  }
+
+  .cert-preview {
+    height: 50vh;
+    max-height: 420px;
   }
 }
 
