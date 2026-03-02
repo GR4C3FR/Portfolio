@@ -1,7 +1,18 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './Projects.css';
 
-const projects = [
+type Project = {
+  title: string;
+  link: string;
+  description: string;
+  tags: string[];
+  live: string;
+  code: string;
+  color: string;
+  images?: string[];
+};
+
+const projects: Project[] = [
   {
     title: 'Endless Charms Jewelry',
     link: 'https://github.com/GR4C3FR/Endless-Charms-Jewelries.git',
@@ -11,6 +22,7 @@ const projects = [
     live: 'https://endlesscharms.store',
     code: 'https://github.com/GR4C3FR/Endless-Charms-Jewelries.git',
     color: '#fd7e14',
+    images: ['/endless-charms-jewelry.webp', '/endless-charms-jewelry-about.webp'],
   },
   {
     title: 'Inocencio Magtoto Memorial Foundation, Inc. (IMMFI)',
@@ -32,16 +44,16 @@ const projects = [
     code: 'https://github.com/GR4C3FR/Sharesource.git',
     color: '#6f42c1',
   },
-  {
-    title: 'FrameRate',
-    link: 'https://github.com/GR4C3FR',
-    description:
-      'A full-stack web application that allows users to browse, rate, and review films. Built as an academic project with a focus on responsive UI and clean database design. Features include user authentication, search/filter, and a dynamic rating system.',
-    tags: ['HTML', 'CSS', 'JavaScript', 'PHP', 'MySQL'],
-    live: '#',
-    code: 'https://github.com/GR4C3FR',
-    color: '#007bff',
-  },
+  // {
+  //   title: 'FrameRate',
+  //   link: 'https://github.com/GR4C3FR',
+  //   description:
+  //     'A full-stack web application that allows users to browse, rate, and review films. Built as an academic project with a focus on responsive UI and clean database design. Features include user authentication, search/filter, and a dynamic rating system.',
+  //   tags: ['HTML', 'CSS', 'JavaScript', 'PHP', 'MySQL'],
+  //   live: '#',
+  //   code: 'https://github.com/GR4C3FR',
+  //   color: '#007bff',
+  // },
   {
     title: 'Personal Portfolio',
     link: 'https://github.com/GR4C3FR/Portfolio.git',
@@ -55,8 +67,13 @@ const projects = [
 ];
 
 export default function Projects() {
-  const [selected, setSelected] = useState(projects[0]);
-  
+  const [selected, setSelected] = useState<Project>(projects[0]);
+  const [featuredImgIdx, setFeaturedImgIdx] = useState(0);
+  const [preview, setPreview] = useState<null | { title: string; images: string[]; idx: number }>(null);
+
+  useEffect(() => {
+    setFeaturedImgIdx(0);
+  }, [selected]);
 
   return (
     <section id="projects" className="section projects-section">
@@ -71,10 +88,43 @@ export default function Projects() {
         <div className="projects-layout">
           {/* Left: Featured detail */}
           <div className="project-featured">
-            <div className="project-featured-thumb" style={{ background: `${selected.color}22` }}>
-              <div className="project-featured-icon" style={{ background: selected.color }}>
-                <CodeIcon />
-              </div>
+            <div
+              className="project-featured-thumb"
+              style={!(selected.images && selected.images.length) ? { background: `${selected.color}22` } : {}}
+            >
+              {selected.images && selected.images.length > 0 ? (
+                <div className="project-featured-img-wrapper">
+                  <img
+                    src={selected.images[featuredImgIdx]}
+                    alt={selected.title}
+                    className="project-featured-img project-featured-img--clickable"
+                    onClick={() => setPreview({ title: selected.title, images: selected.images!, idx: featuredImgIdx })}
+                  />
+                  {selected.images.length > 1 && (
+                    <div className="project-img-nav">
+                      <button
+                        className="project-img-nav-btn"
+                        onClick={() =>
+                          setFeaturedImgIdx(i => (i - 1 + selected.images!.length) % selected.images!.length)
+                        }
+                      >&#8249;</button>
+                      <span className="project-img-nav-indicator">
+                        {featuredImgIdx + 1} / {selected.images.length}
+                      </span>
+                      <button
+                        className="project-img-nav-btn"
+                        onClick={() =>
+                          setFeaturedImgIdx(i => (i + 1) % selected.images!.length)
+                        }
+                      >&#8250;</button>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div className="project-featured-icon" style={{ background: selected.color }}>
+                  <CodeIcon />
+                </div>
+              )}
             </div>
             <div className="project-featured-info">
               <h3 className="project-featured-title">{selected.title}</h3>
@@ -113,12 +163,19 @@ export default function Projects() {
               >
                 <div
                   className="project-card-thumb"
-                  style={{ background: `${project.color}22` }}
+                  style={!(project.images && project.images.length) ? { background: `${project.color}22` } : {}}
                 >
-                  {/* overlay removed per request */}
-                  <div className="project-card-icon" style={{ background: project.color }}>
-                    <CodeIcon />
-                  </div>
+                  {project.images && project.images.length > 0 ? (
+                    <img
+                      src={project.images[0]}
+                      alt={project.title}
+                      className="project-card-img"
+                    />
+                  ) : (
+                    <div className="project-card-icon" style={{ background: project.color }}>
+                      <CodeIcon />
+                    </div>
+                  )}
                 </div>
                 <div className="project-card-info">
                   <p className="project-card-title">{project.title}</p>
@@ -129,6 +186,35 @@ export default function Projects() {
           </div>
         </div>
       </div>
+
+      {preview && (
+        <div className="cert-modal" onClick={() => setPreview(null)}>
+          <div className="cert-modal-inner" onClick={(e) => e.stopPropagation()}>
+            <button className="cert-modal-close" onClick={() => setPreview(null)} aria-label="Close preview">×</button>
+            <h4 className="cert-modal-title">{preview.title}</h4>
+            <div className="cert-preview project-modal-preview">
+              {preview.images.length > 1 && (
+                <button
+                  className="project-modal-nav-btn project-modal-nav-btn--prev"
+                  onClick={() => setPreview(p => p && ({ ...p, idx: (p.idx - 1 + p.images.length) % p.images.length }))}
+                  aria-label="Previous image"
+                ><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+              )}
+              <img src={preview.images[preview.idx]} alt={preview.title} className="cert-preview-img" />
+              {preview.images.length > 1 && (
+                <button
+                  className="project-modal-nav-btn project-modal-nav-btn--next"
+                  onClick={() => setPreview(p => p && ({ ...p, idx: (p.idx + 1) % p.images.length }))}
+                  aria-label="Next image"
+                ><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+              )}
+            </div>
+            {preview.images.length > 1 && (
+              <p className="project-modal-indicator">{preview.idx + 1} / {preview.images.length}</p>
+            )}
+          </div>
+        </div>
+      )}
     </section>
   );
 }

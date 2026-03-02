@@ -97,7 +97,7 @@ export default function About() {
 
           <div className="about-photo-wrap">
             <div className="about-photo-card">
-              <img src="/profile.JPG" alt="Charles Daniel Garcia" className="about-photo" />
+              <img src="/profile.webp" alt="Charles Daniel Garcia" className="about-photo" />
               {/* <p className="about-photo-caption">Charles Daniel Garcia</p> */}
             </div>
           </div>
