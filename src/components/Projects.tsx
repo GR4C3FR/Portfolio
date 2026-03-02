@@ -10,6 +10,7 @@ type Project = {
   code: string;
   color: string;
   images?: string[];
+  themeImages?: { dark: string[]; light: string[] };
 };
 
 const projects: Project[] = [
@@ -33,6 +34,7 @@ const projects: Project[] = [
     live: 'https://immfi.org/',
     code: 'https://github.com/eishley15/immfi.git',
     color: '#e83e8c',
+    images: ['/immfi.webp', '/immfi-dev.webp'],
   },
   {
     title: 'Sharesource',
@@ -43,6 +45,7 @@ const projects: Project[] = [
     live: '#',
     code: 'https://github.com/GR4C3FR/Sharesource.git',
     color: '#6f42c1',
+    images: ['/sharesource.webp', '/sharesource-collab.webp'],
   },
   // {
   //   title: 'FrameRate',
@@ -63,10 +66,14 @@ const projects: Project[] = [
     live: '#',
     code: 'https://github.com/GR4C3FR/Portfolio.git',
     color: '#20c997',
+    themeImages: {
+      dark: ['/personal-portfolio-light.webp', '/personal-portfolio-dark.webp'],
+      light: ['/personal-portfolio-dark.webp', '/personal-portfolio-light.webp'],
+    },
   },
 ];
 
-export default function Projects() {
+export default function Projects({ darkMode }: { darkMode: boolean }) {
   const [selected, setSelected] = useState<Project>(projects[0]);
   const [featuredImgIdx, setFeaturedImgIdx] = useState(0);
   const [preview, setPreview] = useState<null | { title: string; images: string[]; idx: number }>(null);
@@ -74,6 +81,11 @@ export default function Projects() {
   useEffect(() => {
     setFeaturedImgIdx(0);
   }, [selected]);
+
+  const getImages = (project: Project) =>
+    project.themeImages
+      ? (darkMode ? project.themeImages.dark : project.themeImages.light)
+      : project.images;
 
   return (
     <section id="projects" className="section projects-section">
@@ -90,31 +102,31 @@ export default function Projects() {
           <div className="project-featured">
             <div
               className="project-featured-thumb"
-              style={!(selected.images && selected.images.length) ? { background: `${selected.color}22` } : {}}
+              style={!(getImages(selected) && getImages(selected)!.length) ? { background: `${selected.color}22` } : {}}
             >
-              {selected.images && selected.images.length > 0 ? (
+              {getImages(selected) && getImages(selected)!.length! > 0 ? (
                 <div className="project-featured-img-wrapper">
                   <img
-                    src={selected.images[featuredImgIdx]}
+                    src={getImages(selected)![featuredImgIdx]}
                     alt={selected.title}
                     className="project-featured-img project-featured-img--clickable"
-                    onClick={() => setPreview({ title: selected.title, images: selected.images!, idx: featuredImgIdx })}
+                    onClick={() => setPreview({ title: selected.title, images: getImages(selected)!, idx: featuredImgIdx })}
                   />
-                  {selected.images.length > 1 && (
+                  {getImages(selected)!.length > 1 && (
                     <div className="project-img-nav">
                       <button
                         className="project-img-nav-btn"
                         onClick={() =>
-                          setFeaturedImgIdx(i => (i - 1 + selected.images!.length) % selected.images!.length)
+                          setFeaturedImgIdx(i => (i - 1 + getImages(selected)!.length) % getImages(selected)!.length)
                         }
                       >&#8249;</button>
                       <span className="project-img-nav-indicator">
-                        {featuredImgIdx + 1} / {selected.images.length}
+                        {featuredImgIdx + 1} / {getImages(selected)!.length}
                       </span>
                       <button
                         className="project-img-nav-btn"
                         onClick={() =>
-                          setFeaturedImgIdx(i => (i + 1) % selected.images!.length)
+                          setFeaturedImgIdx(i => (i + 1) % getImages(selected)!.length)
                         }
                       >&#8250;</button>
                     </div>
@@ -163,11 +175,11 @@ export default function Projects() {
               >
                 <div
                   className="project-card-thumb"
-                  style={!(project.images && project.images.length) ? { background: `${project.color}22` } : {}}
+                  style={!(getImages(project) && getImages(project)!.length) ? { background: `${project.color}22` } : {}}
                 >
-                  {project.images && project.images.length > 0 ? (
+                  {getImages(project) && getImages(project)!.length > 0 ? (
                     <img
-                      src={project.images[0]}
+                      src={getImages(project)![0]}
                       alt={project.title}
                       className="project-card-img"
                     />

@@ -44,7 +44,7 @@ export default function App() {
       <main>
         <Hero darkMode={darkMode} />
         <About />
-        <Projects />
+        <Projects darkMode={darkMode} />
         <Resume />
         <Contact />
       </main>
