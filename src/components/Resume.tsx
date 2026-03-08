@@ -33,7 +33,7 @@ const experience = [
   // },
   {
     period: 'Oct 2025 – Dec 2025',
-    org: '',
+    org: 'Ryan Diamonds Inc.',
     role: 'Marketing Video Editor',
   },
 ];
