@@ -5,6 +5,8 @@ type Project = {
   title: string;
   link: string;
   description: string;
+  role: string;
+  type: string;
   tags: string[];
   live: string;
   code: string;
@@ -19,6 +21,8 @@ const projects: Project[] = [
     link: 'https://github.com/GR4C3FR/Endless-Charms-Jewelries.git',
     description:
       'A digital showroom for Endless Charms, a premier high-end jewelry brand in the Philippines, specializing in custom engagement rings, wedding bands, and bespoke luxury jewelry crafted from 14k–18k gold, diamonds, and precious gemstones. The website showcases product collections, highlights ethical sourcing and transparent pricing, features customer testimonials, and offers educational content to help customers make informed purchasing decisions. It supports lead generation through clear calls-to-action for consultations and custom designs, strengthening brand identity and credibility within the jewelry market.',
+    role: 'Full-Stack Developer',
+    type: 'Academic Project',
     tags: ['MongoDB', 'Express.js', 'EJS', 'Node.js'],
     live: 'https://endlesscharms.store',
     code: 'https://github.com/GR4C3FR/Endless-Charms-Jewelries.git',
@@ -30,6 +34,8 @@ const projects: Project[] = [
     link: 'https://github.com/eishley15/immfi.git',
     description:
       'Develop and deploy IMMFI’s official website with integrated real-time functionality and interactive elements to increase engagement and streamline volunteer and donation processes.',
+    role: 'UI/UX Designer',
+    type: 'Organizational Project',
     tags: ['MongoDB', 'Express.js', 'React', 'Node.js'],
     live: 'https://immfi.org/',
     code: 'https://github.com/eishley15/immfi.git',
@@ -41,27 +47,34 @@ const projects: Project[] = [
     link: 'https://github.com/GR4C3FR/Sharesource.git',
     description:
       'A web app designed to help students reliably access and share academic materials when course resources aren’t consistently uploaded. It features user authentication, uploading and categorized organization of files, admin approval/moderation for quality control, search and filters for quick discovery, and collaborative tools like comments, feedback/discussions, and ratings—optimized for easy access across devices.',
+    role: 'Full-Stack Developer',
+    type: 'Academic Project',
     tags: ['MongoDB', 'Express.js', 'React', 'Node.js'],
     live: '#',
     code: 'https://github.com/GR4C3FR/Sharesource.git',
     color: '#6f42c1',
     images: ['/sharesource.webp', '/sharesource-collab.webp'],
   },
-  // {
-  //   title: 'FrameRate',
-  //   link: 'https://github.com/GR4C3FR',
-  //   description:
-  //     'A full-stack web application that allows users to browse, rate, and review films. Built as an academic project with a focus on responsive UI and clean database design. Features include user authentication, search/filter, and a dynamic rating system.',
-  //   tags: ['HTML', 'CSS', 'JavaScript', 'PHP', 'MySQL'],
-  //   live: '#',
-  //   code: 'https://github.com/GR4C3FR',
-  //   color: '#007bff',
-  // },
+  {
+    title: 'GlobeCons',
+    link: 'https://github.com/GR4C3FR/AWEB-BADGE.git',
+    description:
+      'A conference web application built with Angular and TypeScript. GlobeCons allows organizers to manage global conference attendees and automatically generate personalized digital badges for participants and speakers. Features a responsive, component-driven UI deployed on Netlify.',
+    role: 'Frontend Developer',
+    type: 'Academic Project',
+    tags: ['Angular', 'TypeScript', 'HTML', 'CSS'],
+    live: 'https://globalconferences.netlify.app/',
+    code: 'https://github.com/GR4C3FR/AWEB-BADGE.git',
+    color: '#007bff',
+    images: ['/globecons.webp', '/globecons-about.webp'],
+  },
   {
     title: 'Personal Portfolio',
     link: 'https://github.com/GR4C3FR/Portfolio.git',
     description:
       'A modern single-page portfolio website built with React, TypeScript, and Vite. Features smooth scrolling, dark/light mode toggle, and a fully responsive layout.',
+    role: 'Frontend Developer',
+    type: 'Personal Project',
     tags: ['React', 'TypeScript', 'Vite', 'CSS3'],
     live: '#',
     code: 'https://github.com/GR4C3FR/Portfolio.git',
@@ -140,6 +153,10 @@ export default function Projects({ darkMode }: { darkMode: boolean }) {
             </div>
             <div className="project-featured-info">
               <h3 className="project-featured-title">{selected.title}</h3>
+              <div className="project-featured-badges">
+                <span className="project-featured-role">{selected.role}</span>
+                <span className="project-featured-type">{selected.type}</span>
+              </div>
               <a
                 href={selected.code}
                 target="_blank"
