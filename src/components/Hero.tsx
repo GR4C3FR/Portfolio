@@ -1,5 +1,6 @@
 import './Hero.css';
 import DecryptedText from './DecryptedText';
+import ColorBends from './ColorBends';
 
 interface HeroProps {
   darkMode: boolean;
@@ -13,6 +14,22 @@ export default function Hero({ darkMode }: HeroProps) {
 
   return (
     <section id="home" className="hero section">
+      <div className="hero-color-bends" aria-hidden="true">
+        <ColorBends
+          colors={[darkMode ? '#bd1d2d' : '#007bff']}
+          rotation={-57}
+          speed={0.2}
+          scale={1}
+          frequency={1}
+          warpStrength={1}
+          mouseInfluence={1}
+          parallax={0.5}
+          noise={0.1}
+          transparent
+          autoRotate={0}
+          color={darkMode ? '#bd1d2d' : '#007bff'}
+        />
+      </div>
       <div className="container hero-inner">
         {/* Left — text */}
         <div className="hero-text">
@@ -90,7 +107,6 @@ export default function Hero({ darkMode }: HeroProps) {
 
         {/* Right — logo */}
         <div className="hero-visual">
-          <div className="hero-logo-glow" />
           <img
             src={darkMode ? '/red-logo.svg' : '/blue-logo.svg'}
             alt="Charles Garcia Logo"

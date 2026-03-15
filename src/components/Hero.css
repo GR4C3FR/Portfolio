@@ -1,10 +1,22 @@
 .hero {
+  --hero-nav-bleed: 96px;
   min-height: 100vh;
   display: flex;
   align-items: center;
   background: linear-gradient(to bottom, var(--bg) 75%, var(--bg-secondary));
   position: relative;
-  overflow: hidden;
+  overflow: visible;
+}
+
+.hero-color-bends {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(-1 * var(--hero-nav-bleed));
+  height: calc(100% + var(--hero-nav-bleed));
+  z-index: 0;
+  opacity: 0.45;
+  pointer-events: none;
 }
 
 /* reduce top spacing so hero sits a bit higher under the sticky nav */
@@ -17,6 +29,8 @@
   grid-template-columns: 1fr 1fr;
   gap: 4rem;
   align-items: center;
+  position: relative;
+  z-index: 1;
 }
 
 /* Left — text */
@@ -127,33 +141,16 @@
   margin-left: 9.5rem;
 }
 
-.hero-logo-glow {
-  position: absolute;
-  width: 320px;
-  height: 320px;
-  border-radius: 50%;
-  background: color-mix(in srgb, var(--accent) 18%, transparent);
-  filter: blur(60px);
-  animation: glowPulse 4s ease-in-out infinite;
-}
-
 .hero-logo-img {
   position: relative;
   z-index: 1;
   width: 360px;
   height: auto;
-  animation: logoFloat 5s ease-in-out infinite;
-  filter: drop-shadow(0 8px 32px color-mix(in srgb, var(--accent) 30%, transparent));
 }
 
 @keyframes logoFloat {
   0%, 100% { transform: translateY(0px); }
   50%       { transform: translateY(-18px); }
-}
-
-@keyframes glowPulse {
-  0%, 100% { opacity: 0.7; transform: scale(1); }
-  50%       { opacity: 1;   transform: scale(1.1); }
 }
 
 /* Restore reveal effect for CTA, socials, and logo area */
