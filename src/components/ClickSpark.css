@@ -1,0 +1,48 @@
+.click-spark-area {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.click-spark-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.click-spark-burst {
+  position: absolute;
+  width: 0;
+  height: 0;
+  transform: translate(-50%, -50%);
+}
+
+.click-spark-line {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: var(--spark-size);
+  height: 3px;
+  border-radius: 999px;
+  background: var(--spark-color);
+  transform-origin: left center;
+  transform: rotate(var(--spark-angle)) scaleX(0);
+  animation: click-spark-fly var(--spark-duration) var(--spark-easing) forwards;
+}
+
+@keyframes click-spark-fly {
+  from {
+    transform: rotate(var(--spark-angle)) scaleX(0.2) scale(var(--spark-extra-scale));
+    opacity: 1;
+  }
+
+  40% {
+    opacity: 1;
+  }
+
+  to {
+    transform: rotate(var(--spark-angle)) translateX(var(--spark-radius)) scaleX(1.25) scale(var(--spark-extra-scale));
+    opacity: 0;
+  }
+}

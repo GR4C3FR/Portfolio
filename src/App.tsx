@@ -6,6 +6,7 @@ import Projects from './components/Projects';
 import Resume from './components/Resume';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import ClickSpark from './components/ClickSpark.tsx';
 import './App.css';
 
 export default function App() {
@@ -39,16 +40,26 @@ export default function App() {
   };
 
   return (
-    <div className="app">
-      <Navbar darkMode={darkMode} toggleDarkMode={() => setDarkMode((d) => !d)} />
-      <main>
-        <Hero darkMode={darkMode} />
-        <About />
-        <Projects darkMode={darkMode} />
-        <Resume />
-        <Contact />
-      </main>
-      <Footer scrollTo={scrollTo} darkMode={darkMode} />
-    </div>
+    <ClickSpark
+      sparkColor={darkMode ? '#bd1d2d' : '#007bff'}
+      sparkSize={10}
+      sparkRadius={58}
+      sparkCount={9}
+      duration={300}
+      easing="ease-out"
+      extraScale={1}
+    >
+      <div className="app">
+        <Navbar darkMode={darkMode} toggleDarkMode={() => setDarkMode((d) => !d)} />
+        <main>
+          <Hero darkMode={darkMode} />
+          <About />
+          <Projects darkMode={darkMode} />
+          <Resume />
+          <Contact />
+        </main>
+        <Footer scrollTo={scrollTo} darkMode={darkMode} />
+      </div>
+    </ClickSpark>
   );
 }
