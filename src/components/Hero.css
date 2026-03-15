@@ -43,8 +43,29 @@
   color: var(--text);
 }
 
-.hero-name span {
-  color: var(--accent);
+.hero-decrypted {
+  color: inherit;
+}
+
+.hero-encrypted {
+  color: inherit;
+  opacity: 1;
+}
+
+.hero-name-decrypted {
+  color: #111111;
+}
+
+.hero-name-encrypted {
+  color: #111111;
+}
+
+[data-theme='dark'] .hero-name-decrypted {
+  color: #ffffff;
+}
+
+[data-theme='dark'] .hero-name-encrypted {
+  color: #ffffff;
 }
 
 .hero-desc {
@@ -135,22 +156,15 @@
   50%       { opacity: 1;   transform: scale(1.1); }
 }
 
-/* ===== Entrance Animations (above-fold — time-based) ===== */
-.hero-greeting {
-  animation: revealLeft 0.55s 0.05s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-}
-.hero-name {
-  animation: revealLeft 0.65s 0.2s  cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-}
-.hero-desc {
-  animation: revealLeft   0.65s 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-}
+/* Restore reveal effect for CTA, socials, and logo area */
 .hero-cta {
-  animation: revealLeft   0.65s 0.5s  cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: revealLeft 0.65s 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
+
 .hero-socials {
-  animation: revealLeft   0.65s 0.62s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: revealLeft 0.65s 0.62s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
+
 .hero-visual {
   animation: revealRight 0.7s 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }

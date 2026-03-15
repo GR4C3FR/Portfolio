@@ -1,4 +1,5 @@
 import './Hero.css';
+import DecryptedText from './DecryptedText';
 
 interface HeroProps {
   darkMode: boolean;
@@ -15,12 +16,49 @@ export default function Hero({ darkMode }: HeroProps) {
       <div className="container hero-inner">
         {/* Left — text */}
         <div className="hero-text">
-          <p className="hero-greeting">Hello, I'm</p>
-          <h1 className="hero-name">Charles Daniel Garcia</h1>
-          <p className="hero-greeting">Web Designer // Front End Developer</p>
+          <p className="hero-greeting">
+            <DecryptedText
+              text="Hello, I'm"
+              animateOn="view"
+              speed={45}
+              sequential
+              revealDirection="start"
+              className="hero-decrypted"
+              encryptedClassName="hero-encrypted"
+            />
+          </p>
+          <h1 className="hero-name">
+            <DecryptedText
+              text="Charles Daniel Garcia"
+              animateOn="view"
+              speed={55}
+              sequential
+              revealDirection="start"
+              className="hero-name-decrypted"
+              encryptedClassName="hero-name-encrypted"
+            />
+          </h1>
+          <p className="hero-greeting">
+            <DecryptedText
+              text="Web Designer // Front End Developer"
+              animateOn="view"
+              speed={40}
+              sequential
+              revealDirection="start"
+              className="hero-decrypted"
+              encryptedClassName="hero-encrypted"
+            />
+          </p>
           <p className="hero-desc">
-            An aspiring web designer and front-end developer passionate about
-            building functional and visually clean websites.
+            <DecryptedText
+              text="An aspiring web designer and front-end developer passionate about building functional and visually clean websites."
+              animateOn="view"
+              speed={34}
+              sequential
+              revealDirection="start"
+              className="hero-decrypted"
+              encryptedClassName="hero-encrypted"
+            />
           </p>
           <div className="hero-cta">
             <button className="btn btn-primary" onClick={() => scrollTo('projects')}>
